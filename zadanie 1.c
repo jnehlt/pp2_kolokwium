@@ -1,10 +1,10 @@
 /*
 
-    1.zapytaæ u¿ytkownika o liczbê
-    2.zaalokowaæ pamiêæ na tablicê typu char o rozmiarze podanym przez u¿ytkownika (chodzi o u¿ycie calloc())
-    3.wype³niæ tablicê losowymi ma³ymi literami
-    4.napisaæ funkcjê która zamieni ma³e samog³oski na du¿e
-    5.zwolniæ pamiêæ
+    1.zapytac uzytkownika o liczbe
+    2.zaalokowac pamiec na tablice typu char o rozmiarze podanym przez uzytkownika (chodzi o uï¿½ycie calloc())
+    3.wypelnic tablice losowymi malymi literami
+    4.napisac funkcje ktora zamieni male samogloski na duze
+    5.zwolnic pamiec
 
 */
 
@@ -20,7 +20,6 @@ char* allokuj(int);
 void wypelnij(char*, int);
 void zamien_na_duze(char*, int);
 void wyswietl(char*);
-
 
 int main(void){
     int liczba;
@@ -86,6 +85,5 @@ void zamien_na_duze(char *tablica, int liczba){
         wyswietl(tablica+i);
         ++i;
     }
-
     return;
 }
