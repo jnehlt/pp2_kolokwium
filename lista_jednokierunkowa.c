@@ -1,23 +1,23 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-struct lista;
+typedef lista ls_t;
 
-struct lista
+struct ls_t
 {
-  struct lista* nastepny;
+  ls_t* nastepny;
   int dane;
 };
 
-unsigned int rozm_listy(struct lista*);
-struct lista* list_add_begin(struct lista*, int value);
-struct lista* list_add_end(struct lista*, int value);
-struct lista* list_del_node(struct lista*, int which, int number_of_nodes);
-void list_show(struct lista*);
+unsigned int rozm_listy(ls_t*);
+ls_t* list_add_begin(ls_t*, int value);
+ls_t* list_add_end(ls_t*, int value);
+ls_t* list_del_node(ls_t*, int which, int number_of_nodes);
+void list_show(ls_t*);
 
 int main (void)
 {
-  struct lista* root = NULL;
+  ls_t* root = NULL;
 
   root = list_add_begin(root, 40);
   root = list_add_begin(root, 30);
@@ -35,7 +35,7 @@ int main (void)
   return 0;
 }
 
-unsigned int rozm_listy (struct lista* p)
+unsigned int rozm_listy (ls_t* p)
 {
   unsigned int rozmiar = 0;
   while(p)
@@ -47,7 +47,7 @@ unsigned int rozm_listy (struct lista* p)
   return rozmiar;
 }
 
-void list_show(struct lista* p)
+void list_show(ls_t* p)
 {
   while(p)
   {
@@ -56,43 +56,43 @@ void list_show(struct lista* p)
   }
 }
 
-struct lista* list_add_begin(struct lista* r, int value)
+ls_t* list_add_begin(ls_t* r, int value)
 {
   if (r == NULL)
   {
-    r = (struct lista*)malloc(sizeof(struct lista));
+    r = (ls_t*)malloc(sizeof(ls_t));
     r->dane = value;
     r->nastepny = NULL;
     return r;
   }
   else
   {
-    struct lista* begin = (struct lista*)malloc(sizeof(struct lista));
+    ls_t* begin = (ls_t*)malloc(sizeof(ls_t));
     begin->dane = value;
     begin->nastepny = r;
     return begin;
   }
 }
 
-struct lista* list_add_end(struct lista* r, int value)
+ls_t* list_add_end(ls_t* r, int value)
 {
-  struct lista* root = r;
+  ls_t* root = r;
   while(r->nastepny)
   {
     r = r->nastepny;
   }
-  struct lista* end = (struct lista*)malloc(sizeof(struct lista));
+  ls_t* end = (ls_t*)malloc(sizeof(ls_t));
   end->dane = value;
   r->nastepny = end;
   end->nastepny = NULL;
   return root;
 }
 
-struct lista* list_del_node(struct lista* r, int which, int number_of_nodes)
+ls_t* list_del_node(ls_t* r, int which, int number_of_nodes)
 {
   int iterator;
-  struct lista* root = r;
-  struct lista* del = r;
+  ls_t* root = r;
+  ls_t* del = r;
 
   if(which < 1)
   {
@@ -115,13 +115,13 @@ struct lista* list_del_node(struct lista* r, int which, int number_of_nodes)
   {
     if(del->nastepny->nastepny == NULL)
     {
-      struct lista* del2 = del->nastepny;
+      ls_t* del2 = del->nastepny;
       del->nastepny = NULL;
       goto A;
     }
     del = del->nastepny;
   }
-  struct lista* del2 = del->nastepny;
+  ls_t* del2 = del->nastepny;
   del->nastepny = del->nastepny->nastepny;
   A:free(del2);
   return root;
