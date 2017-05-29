@@ -2,11 +2,11 @@
 #include <stdio.h>
 #include "ljc.h"
 
-ls_t* init_list(ls_t* r)
+ls_t* init_list(ls_t* r, int value)
 {
   r = (ls_t*)malloc(sizeof(ls_t));
   r->next = r;
-  r->value = 0;
+  r->value = value;
   return r;
 }
 
@@ -80,34 +80,60 @@ ls_t* list_add_end(ls_t* r, int value)
 
 ls_t* list_del_node(ls_t* r, int which)
 {
-  int i = 1;
-  ls_t* loop = r;
-  ls_t* del;
-  ls_t* buf;
-
-  while(r->next != loop)
+  if(which > 0)
   {
-    r = r->next;
-    ++i;
+    if(r == r->next) //one element list_del_node
+    {
+      free(r);
+      return NULL;
+    }
+    else
+    {
+      ls_t* root = r;
+      int i = 1;
+      while(i < which)
+      {
+        r = r->next;
+        if(r == root) //we've got an loop...
+        {
+          printf("ERROR_2\nyou expect too much from me\n");
+          return root;
+        }
+        ++i;
+      }
+      ls_t *temp = r;
+      while(r->next != temp)
+      {
+        r = r->next;
+        printf("r = %p\n",r);
+      }
+      r->next = r->next->next;
+      if(temp == root)  //if deleting first element
+      {
+        r = r->next;
+        return r; //you cannot return deleted element...
+      }
+      free(temp);
+      RETURN:return root;
+    }
   }
-  r = r->next;
-  if(which > i)
+  else
   {
-    printf("out of range");
-    return loop;
+    printf("ERROR_1\n r u dumb? --__--\n");
+    goto RETURN;
   }
-   for(i = 1; i < which; ++i)
-   {
-     r = r->next;
-   }
-   del = r;
-   buf = r->next;
-   for(i = 1; i < which+1; ++i)
-   {
-     r = r->next;
-   }
-   r->next = buf;
-   free(del);
+}
 
-  return loop;
+ls_t* list_clear(ls_t* r)
+{
+  //DOIT!!!!
+  // ls_t* temp;
+  // while(r->next != NULL)
+  // {
+  //   temp = r;
+  //   r = r->next;
+  //   free(temp);
+  // }
+
+  return r;
 }
