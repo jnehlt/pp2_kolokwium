@@ -10,7 +10,10 @@
     ls_t* list_add_begin(ls_t*, int);
     ls_t* list_add_end(ls_t*, int);
     ls_t* list_del_node(ls_t*, int);
-    ls_t* list_clear(ls_t*);
+    void list_clear(ls_t**);
+    void list_search_with_guard(ls_t*, int);
+    void list_search(ls_t*, int);
+    ls_t* insertion_sort(ls_t*);
     unsigned int list_size(ls_t*);
     void list_view(ls_t*);
 #endif
