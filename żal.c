@@ -1,3 +1,5 @@
+//śmiechu warte 
+
 #include <stdio.h>
 #include <stdlib.h>
 
